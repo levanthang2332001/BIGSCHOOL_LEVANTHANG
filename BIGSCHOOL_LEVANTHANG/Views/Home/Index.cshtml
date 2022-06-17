@@ -1,11 +1,11 @@
 ﻿@model IEnumerable<BIGSCHOOL_LEVANTHANG.Models.Course>
-@{ 
+@{
     ViewBag.Title = "Home Page";
 }
 
 <div class="row">
     <ul class="course">
-        @foreach(var courses in Model)
+        @foreach (var courses in Model)
         {
             <li>
                 <div class="date">
@@ -19,13 +19,48 @@
                 <div class="details">
                     <span class="lecturer">
                         @courses.Lecturer.Name
+                        <button class="btn btn-default btn-sm js-toggle-follow" data-user-id="@courses.LecturerId">Follow</button>
                     </span>
+                    <br />
                     <span class="category">
                         @courses.Category.Name
                     </span>
+                    <button data-course-id="@courses.Id" class="btn btn-default btn-sm js-toggle-attandance">Going?</button>
                 </div>
             </li>
         }
     </ul>
+@section scripts
+{
+    <script>
+        $(document).ready(function () {
+            $(".js-toggle-attandance").click(function (e) {
+                var button = $(e.target);
+                $.post("/api/attendances", { courseId: button.attr("data-course-id") })
+                    .done(function () {
+                        button
+                            .removeClass("btn-default")
+                            .addClass("btn-info")
+                            .text("Going");
+                    })
+                    .fail(function () {
+                        alert("Something failes!");
+                    });
+            });
+            $(".js-toggle-follow").click(function (e) {
+                var button = $(e.target);
+                $.post("/api/followings", { followeeId: button.attr("data-user-id") })
+                    .done(function () {
+                        button.text("Following") 
+                    })
+                    .fail(function () {
+                        alert("Something failes!");
+                    });
+            });
+        });
+    </script>
+}
 </div>
+
+
 
