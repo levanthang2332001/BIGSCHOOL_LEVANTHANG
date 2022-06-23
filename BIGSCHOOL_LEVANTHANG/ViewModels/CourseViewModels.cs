@@ -20,6 +20,9 @@ namespace BIGSCHOOL_LEVANTHANG.ViewModels
         [Required]
         public byte Category { get; set; }
         public IEnumerable<Category> categories { get; set; }
+
+        public IEnumerable<Course> UpcommingCourse { get; set; }
+        public bool ShowAction { get; set; }
         public DateTime GetDateTime()
         {
             return DateTime.Parse(String.Format("{0} {1}", Date, Time));

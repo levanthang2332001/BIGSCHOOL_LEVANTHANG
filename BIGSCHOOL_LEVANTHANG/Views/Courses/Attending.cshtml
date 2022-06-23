@@ -1,8 +1,11 @@
 ﻿
 @model BIGSCHOOL_LEVANTHANG.ViewModels.CourseViewModels
 @{
-    ViewBag.Title = "Home Page";
+    ViewBag.Title = "Attending";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
+<h2>Attending</h2>
 
 <div class="row">
     <ul class="course">
@@ -38,9 +41,9 @@
             </li>
         }
     </ul>
-@section scripts
+    @section scripts
 {
-    <script>
+        <script>
         $(document).ready(function () {
             $(".js-toggle-attandance").click(function (e) {
                 var button = $(e.target);
@@ -59,15 +62,15 @@
                 var button = $(e.target);
                 $.post("/api/followings", { followeeId: button.attr("data-user-id") })
                     .done(function () {
-                        button.text("Following") 
+                        button.text("Following")
                     })
                     .fail(function () {
                         alert("Something failes!");
                     });
             });
         });
-    </script>
-}
+        </script>
+    }
 </div>
 
 
