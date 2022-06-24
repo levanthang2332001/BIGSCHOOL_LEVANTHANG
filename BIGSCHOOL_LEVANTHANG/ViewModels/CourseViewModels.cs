@@ -9,6 +9,7 @@ namespace BIGSCHOOL_LEVANTHANG.ViewModels
 {
     public class CourseViewModels
     {
+        public int Id { get; set; }
         [Required]
         public string Place { get; set; }
         [Required]
@@ -26,6 +27,11 @@ namespace BIGSCHOOL_LEVANTHANG.ViewModels
         public DateTime GetDateTime()
         {
             return DateTime.Parse(String.Format("{0} {1}", Date, Time));
+        }
+        public string Heading { get; set; }
+        public string Action
+        {
+            get { return (Id != 0) ? "Update" : "Create"; }
         }
 
 

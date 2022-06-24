@@ -44,5 +44,6 @@ namespace BIGSCHOOL_LEVANTHANG.Models
 
             base.OnModelCreating(modelBuilder);
         }
+
     }
 }
